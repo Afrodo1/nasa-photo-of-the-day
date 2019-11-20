@@ -1,14 +1,49 @@
 import React from "react";
+import APOD from "./components/APOD";
 import "./App.css";
+import styled from "styled-components";
+
+
+ const Header  = styled.div`
+    display: flex;
+    justify-content: center;
+`;
+
+ const Box  = styled.div`
+    display: flex;
+    flex:direction: column;
+    align-content: center;
+    width: 50%;
+    margin-left: 25%;    
+    img{
+      width: 80%;
+    }
+    background-color: grey;
+ 
+    
+    
+`;
+const Container = styled.div`
+  display: flex:
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  background-color: #F2EDD8; 
+  `;
+
+
 
 function App() {
   return (
-    <div className="App">
-      <p>
-        Read through the instructions in the README.md file to build your NASA
-        app! Have fun 🚀!
-      </p>
-    </div>
+  <Container className="cont">
+    <Header className="header">    
+       
+        <h1>Astronomy Picture of the Day</h1>      
+    </Header>
+    <Box className="App">
+        <APOD/> 
+    </Box>
+  </Container>
   );
 }
 
