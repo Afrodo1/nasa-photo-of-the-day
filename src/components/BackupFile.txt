@@ -1,0 +1,80 @@
+import React, {useState, useEffect} from 'react';
+import APODbox from './APODbox';
+import axios from 'axios';
+
+
+export default class DateChanger extends React.Component {
+    constructor(props) {
+    super(props);
+    this.state = {value: ''};
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleChange(event) {
+    this.setState({value: event.target.value});
+    }
+
+    handleSubmit(event) {
+    alert('A name was submitted: ' + this.state.value);
+    event.preventDefault();
+    } 
+    APOD () {
+        const[pod,setPod] = useState([]);
+    
+        useEffect(()=>{
+            axios.get(`http://api.nasa.gov/planetary/apod?api_key=3N8AbUSY3gYwrPxuCIeYjt31L0fBobr4H467hcfH&date=${this.state.value}`)
+            .then(response=>{
+                console.log(response.data);
+                setPod(response.data);
+            }).catch(error =>{
+                console.log(error);
+            })
+        },[])
+        return(
+            <div className='container'>
+                <APODbox title = {pod.title} url = {pod.url} date = {pod.date} explanation = {pod.explanation}/>
+            </div>
+        )    
+    
+    }
+    render(){
+        return(
+            <React.Fragment>
+            <form onSubmit={this.handleSubmit}>
+            <label>
+                Name:
+                <input type="text" value={this.state.value} onChange={this.handleChange} />
+            </label>
+            <input type="submit" value="Submit"/>
+            </form>
+            <this.APOD/>
+            </React.Fragment>
+        );
+    }     
+};
+
+// function APOD () {
+//     const[pod,setPod] = useState([]);
+
+//     useEffect(()=>{
+//         axios.get('http://api.nasa.gov/planetary/apod?api_key=3N8AbUSY3gYwrPxuCIeYjt31L0fBobr4H467hcfH')
+//         .then(response=>{
+//             console.log(response.data);
+//             setPod(response.data);
+//         }).catch(error =>{
+//             console.log(error);
+//         })
+//     },[])
+
+//     return(
+//         <div className='container'>
+//             <APODbox title = {pod.title} url = {pod.url} date = {pod.date} explanation = {pod.explanation}/>
+//         </div>
+//     )
+
+
+// }
+
+// export default APOD;
