@@ -2,6 +2,7 @@ import React from "react";
 import APOD from "./components/APOD";
 import "./App.css";
 import styled from "styled-components";
+// import DateChanger from "./DateChanger";
 
 
  const Header  = styled.div`
@@ -34,8 +35,10 @@ const Container = styled.div`
 
 
 function App() {
+  
   return (
   <Container className="cont">
+    {/* <DateChanger/> */}
     <Header className="header">    
        
         <h1>Astronomy Picture of the Day</h1>      
